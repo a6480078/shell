@@ -1,0 +1,12 @@
+- name: deploy_k8s 
+  hosts: k8s
+  gather_facts: no
+#  vars:
+#    greeting: "{{ inventory_hostname }}"
+  tasks:
+    - name: copy /etc/hosts
+      copy: src=/etc/hosts dest=/etc
+    - name: install expect 
+      yum: name=expect state=latest
+    - name: k8s_init
+      script: k8s.sh  
