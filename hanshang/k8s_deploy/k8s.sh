@@ -10,7 +10,7 @@ yum install -y  bash-completion ebtables epel-release docker etcd yum-utils devi
 sleep 2
 echo
 echo
-IP=`ifconfig eth0|grep "inet "|awk '{print$2}'`
+IP=`ifconfig ens32|grep "inet "|awk '{print$2}'`
 HOSTNAME=`hostname`
 mkdir -p /root/kubernetes-1.10
 cd /root/kubernetes-1.10
@@ -353,6 +353,7 @@ exit 0
 ;;
 kubeadm_init)
 echo
+cd ~/kubernetes-1.10/
 kubeadm init --config config.yaml
 if [ $? -eq 0 ];then
 mkdir -p $HOME/.kube
@@ -364,7 +365,10 @@ sleep 5
 ##############部署flannel网络##########################################
 kubectl apply -f kube-flannel.yml
 ;;
+
+
 k8s_dashboard)
+cd ~/kubernetes-1.10/
 wget http://203.110.209.244:88/rpm/kubernetes-1.10/k8s-images-1.10.tar.gz
 docker load -i k8s-images-1.10.tar.gz
 wget http://203.110.209.244:88/rpm/kubernetes-1.10/kubernetes-dashboard-http.yaml
@@ -375,10 +379,14 @@ kubectl apply -f kubernetes-dashboard-http.yaml
 kubectl apply -f admin-role.yaml
 kubectl apply -f kubernetes-dashboard-admin.rbac.yaml
 ;;
+
+
 weave_scope)
 wget http://203.110.209.244:88/rpm/kubernetes-1.10/scope.yaml
 kubectl apply -f scope.yaml
 ;;
+
+
 bye)
 echo
 exit 0
