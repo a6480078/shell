@@ -1,0 +1,13 @@
+[Unit]
+Description=elasticsearch for Applications
+After=network-online.target
+Wants=network-online.target
+
+
+[Service]
+ExecStart=/usr/local/work/elasticsearch-6.2.3/start.sh
+ExecStop=/usr/local/work/elasticsearch-6.2.3/stop.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

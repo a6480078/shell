@@ -29,6 +29,14 @@ EOF
 echo "user.txt is created"
 
 
+cat >> /etc/security/limits.conf << EOF
+*        hard    nproc           100000
+*        soft    nproc           100000
+*        hard    nofile           1024000
+*        soft    nofile           1024000
+* soft  memlock  unlimited
+* hard memlock  unlimited
+EOF
 ############初始化密码#################################
 for i in `awk '{print$1}' user.txt`
 do

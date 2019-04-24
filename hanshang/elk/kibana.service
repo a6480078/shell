@@ -1,0 +1,12 @@
+[Unit]
+Description=kibana for Applications
+After=logstash.service
+BindsTo=logstash.service
+
+[Service]
+ExecStart=/usr/local/work/kibana-6.2.3-linux-x86_64/start.sh
+ExecStop=/usr/local/work/kibana-6.2.3-linux-x86_64/stop.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=elastalert for Applications
+After=kibana.service
+BindsTo=kibana.service
+
+[Service]
+ExecStart=/usr/local/work/elastalert/start.sh
+ExecStop=/usr/local/work/elastalert/stop.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
