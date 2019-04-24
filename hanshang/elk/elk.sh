@@ -142,3 +142,9 @@ pip install --upgrade --force-reinstall pip==9.0.3
 pip uninstall PyYAML
 pip install --upgrade pip
 pip install elastalert
+
+
+###########替换elk logo#############################
+cd /usr/local/work/kibana-6.2.3-linux-x86_64/optimize/bundles
+grep logo.kibana commons.style.css
+###############替换url后面的svg文件即可
