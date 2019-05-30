@@ -65,39 +65,3 @@ echo
 curl http://mirrors.aliyun.com/repo/Centos-7.repo > /etc/yum.repos.d/CentOS-Base.repo
 echo "update yum repo is successful"
 echo
-echo
-
-
-
-############更新内核版本##################################
-rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-sleep 5
-rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
-sleep 5
-yum --disablerepo="*" --enablerepo="elrepo-kernel" list available
-yum --enablerepo=elrepo-kernel install kernel-lt -y
-echo "kernel is updated"
-###########修改默认启动内核##################################
-sed -i 's/GRUB_DEFAULT=saved/GRUB_DEFAULT=0/g' /etc/default/grub
-sleep 5
-grub2-mkconfig -o /boot/grub2/grub.cfg
-echo "default kernel boot is updated"
-
-
-
-##########使用iscsiadm连接Lenovo存储#########################
-yum install -y iscsi-initiator-utils
-systemctl start iscsid && systemctl enable  iscsid
-iscsiadm -m node  -L all
-
-echo "iscsid is installed"
-
-
-##########配置multipath######################################
-yum install device-mapper device-mapper-multipath -y
-modprobe dm-multipath
-modprobe dm-round-robin
-systemctl start multipathd ; systemctl enable multipathd
-/sbin/mpathconf
-mpathconf --enable --with_multipathd y
-multipath -ll

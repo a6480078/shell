@@ -1,0 +1,5 @@
+bruce.xiong     ALL=(ALL)       NOPASSWD: ALL
+michael.liu     ALL=(ALL)       NOPASSWD: ALL
+jhin.sun        ALL=(ALL)       NOPASSWD: ALL
+henry.deng        ALL=(ALL)       NOPASSWD: ALL
+steve.qiao        ALL=(ALL)       NOPASSWD: ALL
